@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+package price;
+
+service PriceProtoService {
+  rpc GetBitcoinPrice (BitcoinPriceRequest) returns (stream BitcoinPriceReply); //server streaming call
+  rpc PushSatoshiToBalance (stream PushSatoshisRequest) returns (BalanceReply); //client streaming call
+}
+
+message BitcoinPriceRequest {
+}
+
+message BitcoinPriceReply {
+  double currentPrice = 1;   
+}
+
+message PushSatoshisRequest{
+	double satoshis = 1;
+}
+
+message BalanceReply{
+	double usdBalance = 1;
+	double btcBalance = 2;
+	double ethBalance = 3;
+	double adaBalance = 4;
+	double solBalance = 5;
+}

@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "GrpcServer";
+
+package data;
+
+service DataProtoService { 
+  rpc GetPeople (PeopleRequest) returns (PeopleReply); //unary call
+}
+
+message PeopleRequest {
+  int32 quantity = 1;
+}
+
+message PeopleReply {
+  repeated PersonReply people = 1;   
+}
+
+message PersonReply{
+  string id = 1;
+  string fullName = 2;
+  string email = 3;
+  optional int32 age = 4;
+  google.protobuf.Timestamp birth = 5;
+  //reserved 7, 8 to 10;
+  //reserved "testProp01", "testProp02";
+  //string pepe = 9;
+  //string testProp01 = 100;
+  //UserType userType = 20;
+}
+
+
+enum UserType {
+  Bronze = 0;
+  Silver = 1;
+  Gold = 2;
+  Platinum = 3;
+}
